@@ -1,2 +1,2 @@
 # ApplePicker
-My games about apple drop
+My game about apples drop
