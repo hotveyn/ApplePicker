@@ -1,56 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Thing : MonoBehaviour
 {
-    
-    Vector3 rotDirection;
-    
+    protected Vector3 rotDirection;
+    public int score;
+    string lname;
 
-    void Start()
+
+
+
+    void Awake()
     {
+        lname = SceneManager.GetActiveScene().name;
+        if (lname == "MainMenu")
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
+
         rotDirection = RotationDirection();
     }
 
-    void Update()
+
+    public void Update()
     {
-        if (transform.position.y < -20f)
+        if (transform.position.y <= -Camera.main.orthographicSize)
         {
-            if (tag != "Bomb")
-            {
-                GameObject basketSpawn = GameObject.Find("Baskets");
-                Baskets bskSpawn = basketSpawn.GetComponent<Baskets>();
-                
-                List<GameObject> tAppleList = new List<GameObject>();
-                foreach (GameObject allAples in GameObject.FindGameObjectsWithTag("Apple"))
-                {
-                    tAppleList.Add(allAples);
-                }
-                foreach (GameObject allAples in GameObject.FindGameObjectsWithTag("GoldenApple"))
-                {
-                    tAppleList.Add(allAples);
-                }
-                foreach (GameObject allAples in GameObject.FindGameObjectsWithTag("Bomb"))
-                {
-                    tAppleList.Add(allAples);
-                }
-                foreach (GameObject tGO in tAppleList)
-                {
-                    Destroy(tGO);
-                }
-
-                //bskSpawn.DeleteOnceOfBasket();
-
-                
-
-            }
-            Destroy(this.gameObject);                   
+            OverBottom();
         }
 
         transform.Rotate(rotDirection * Time.deltaTime);
     }
 
+    // ¬озвращает случайное направление вращение
     Vector3 RotationDirection()
     {
         int minusOrPlus;
@@ -75,8 +59,23 @@ public class Thing : MonoBehaviour
         {
             rotationDirection.y = Random.Range(-60f, -30f);
         }
-       
+
         return rotationDirection;
+    }
+
+    public virtual void OverBottom()
+    {
+        try
+        {
+            GameObject baskets = GameObject.Find("Baskets");
+            Baskets bsktsScript = baskets.GetComponent<Baskets>();
+            bsktsScript.DeleteOnceOfBasketAndAllDrops();
+            Destroy(this.gameObject);
+        }
+        catch
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
