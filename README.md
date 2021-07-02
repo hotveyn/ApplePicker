@@ -1,2 +1,2 @@
 # ApplePicker
-i need
+My game about apples drop
