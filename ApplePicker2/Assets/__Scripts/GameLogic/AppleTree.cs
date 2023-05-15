@@ -34,7 +34,7 @@ public class AppleTree : MonoBehaviour
     }
     void Update()
     {
-        // Двигает дерево в одну из сторон
+        // Р”РІРёРіР°РµС‚ РґРµСЂРµРІРѕ РІ РѕРґРЅСѓ РёР· СЃС‚РѕСЂРѕРЅ
         pos = transform.position;
         pos.x += treeSpeed * Time.deltaTime;
         transform.position = pos;
@@ -47,21 +47,21 @@ public class AppleTree : MonoBehaviour
             treeSpeed = -Mathf.Abs(treeSpeed);
         }
 
-        // Вращение дерево по своей оси
+        // Р’СЂР°С‰РµРЅРёРµ РґРµСЂРµРІРѕ РїРѕ СЃРІРѕРµР№ РѕСЃРё
         transform.Rotate(new Vector3(0f, 10f * Time.deltaTime, 0f)); 
         
     }
 
     private void FixedUpdate()
     {
-        // С некоторым шансом менятем направление движения
+        // РЎ РЅРµРєРѕС‚РѕСЂС‹Рј С€Р°РЅСЃРѕРј РјРµРЅСЏС‚РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ
         if (Random.Range(0f, 100f) <= chanceToChangeDirection)
         {
             treeSpeed = -treeSpeed;
         }
     }
 
-    // Сбрасывает предмет на позиции яблони
+    // РЎР±СЂР°СЃС‹РІР°РµС‚ РїСЂРµРґРјРµС‚ РЅР° РїРѕР·РёС†РёРё СЏР±Р»РѕРЅРё
     void ThingDrop()
     {
         Vector3 thingPos;
@@ -88,7 +88,7 @@ public class AppleTree : MonoBehaviour
         }
     }
 
-    //Увеличивает cложность путём увеличивания скорости яблони и (реализую потом) скорости падения яблок
+    //РЈРІРµР»РёС‡РёРІР°РµС‚ cР»РѕР¶РЅРѕСЃС‚СЊ РїСѓС‚С‘Рј СѓРІРµР»РёС‡РёРІР°РЅРёСЏ СЃРєРѕСЂРѕСЃС‚Рё СЏР±Р»РѕРЅРё Рё (СЂРµР°Р»РёР·СѓСЋ РїРѕС‚РѕРј) СЃРєРѕСЂРѕСЃС‚Рё РїР°РґРµРЅРёСЏ СЏР±Р»РѕРє
     void DifficultyUp()
     {
         treeSpeed = Mathf.Abs(treeSpeed) + numberOfSpeedUp;

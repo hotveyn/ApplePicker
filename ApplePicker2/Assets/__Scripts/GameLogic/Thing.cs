@@ -34,7 +34,7 @@ public class Thing : MonoBehaviour
         transform.Rotate(rotDirection * Time.deltaTime);
     }
 
-    // Возвращает случайное направление вращение
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃР»СѓС‡Р°Р№РЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ РІСЂР°С‰РµРЅРёРµ
     Vector3 RotationDirection()
     {
         int minusOrPlus;
